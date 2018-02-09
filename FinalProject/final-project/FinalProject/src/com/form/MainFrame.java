@@ -7,6 +7,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -41,6 +42,7 @@ public class MainFrame extends JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Variables declaration">
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	// Generated using JFormDesigner Evaluation license - Statenco Dragos
+
 	private JTabbedPane tabbedPane;
 	private JPanel ocrPanel;
 	private JLabel ocrTitleLabel;
@@ -72,6 +74,9 @@ public class MainFrame extends JFrame {
 	private JLabel subscriptionTextRegionLabel;
 	private JComboBox<String> subscriptionRegionComboBox;
 	private JTextField subscriptionKeyTextField;
+
+	// End of variables declaration//GEN-END:variables
+	// </editor-fold>
 
 	private MainFrame() {
 		initComponents();
@@ -158,6 +163,7 @@ public class MainFrame extends JFrame {
 					ocrResponseTextArea.setEditable(false);
 					ocrResponseTextArea.setColumns(20);
 					ocrResponseTextArea.setRows(5);
+					ocrResponseTextArea.setLineWrap(true);
 					ocrScrollPane.setViewportView(ocrResponseTextArea);
 				}
 
@@ -241,6 +247,7 @@ public class MainFrame extends JFrame {
 		pack();
 		setLocationRelativeTo(getOwner());
 	}// </editor-fold>//GEN-END:initComponents
+
 
 	private JSONObject HandwritingImage(String imageUrl) {
 		try(CloseableHttpClient textClient = HttpClientBuilder.create().build(); CloseableHttpClient resultClient = HttpClientBuilder.create().build()){
@@ -509,7 +516,7 @@ public class MainFrame extends JFrame {
 
 			// Request body.
 
-			FileEntity reqEntity = new FileEntity(imageUrl, "application/octet-stream");
+			FileEntity reqEntity = new FileEntity(imageUrl, ContentType.APPLICATION_OCTET_STREAM);
 			request.setEntity(reqEntity);
 
 			// Execute the REST API call and get the response entity.
@@ -621,7 +628,6 @@ public class MainFrame extends JFrame {
 }
 
 
-		// End of variables declaration//GEN-END:variables
-		// </editor-fold>
+
 
 
